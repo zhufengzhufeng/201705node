@@ -1,12 +1,20 @@
 {
   "name": "201705",
   "version": "1.0.0",
-  "description": "",
+  "description": "姜文 1035465284  18310349227\r 前三周全日制讲vue 简单 es6语法\r 后三周讲react\r 周末node课程",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhufengzhufeng/201705node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhufengzhufeng/201705node/issues"
+  },
+  "homepage": "https://github.com/zhufengzhufeng/201705node#readme"
 }

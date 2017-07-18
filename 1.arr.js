@@ -46,3 +46,18 @@ let r = ary.reduce((prev,next)=>{
     return prev+next.price;//保证上一项永远是数组
 },0);
 console.log(r);
+
+//5).filter 过滤 返回的是一个过滤后的数组，满足条件就放到新数组中
+//[1,2,3,4,5]
+let ars = arr.filter(item=>!(item<=3));
+console.log(ars);
+
+//6).map 映射 映射出一个新的数组,map函数中的返回值将会作为数组里的新项
+let ma = [1,2,3]; // template String
+let res = ma.map(item=>`<li>${item}</li>`);
+console.log(res.join(''));
+
+//以上方法都属于声明式，不关心内部结构 （用法）
+//我们以前写的代码 都类似于编程式代码
+//angular 1.0  angular2.0  angular 4
+//0 - > 1.0  -> 2.0 虚拟dom 内存中的对象

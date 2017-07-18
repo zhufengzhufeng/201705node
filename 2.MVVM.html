@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-cloak]{display: none}
+    </style>
+</head>
+<body>
+<div id="app1">
+    <!--会将msg的值赋予给输入框，当输入框值发生变化的时候，将值在赋予给msg变量-->
+    <input type="text" v-model="msg">
+    <!--{{}}是v-text的简写，属性默认不会展示在html上，当编译好后会自动插入到div中-->
+    <!--放置三元运算符 表达式 或者函数执行的返回结果-->
+    {{msg=='我很帅'?'ok':'no'}}
+    <div v-text="msg=='我很帅'?'ok':'no'"></div>
+    <!--只绑定一次-->
+    <div v-once>{{msg}}</div>
+    <!--绑定html xss攻击-->
+    <div v-html="msg"></div>
+    <!--clock闪烁  防止闪烁-->
+    <div v-cloak>
+        {{msg}}{{msg}}{{msg}}{{msg}}{{msg}}
+    </div>
+</div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //可以创建多个实例 但是根本不用,vue-devtools可以帮我们调试vue代码
+    //视图能改变才能双向数据绑定，能改变 input(text checkbox radio ) 类型 textarea,select 如果见到以上属性 想获取值，需要加一个“指令” 特殊的html的属性 以v-开头的行间属性  v-model实现双向数据绑定的
+    let vm = new Vue({
+        el:'#app1',
+        data:{
+            msg:'<h1>我很帅</h1>'
+        }
+    });
+</script>
+</html>

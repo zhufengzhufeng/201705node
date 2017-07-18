@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--moustache;-->
+    {{msg}}
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<!--一片json 配一片html即可-->
+<script>
+    //vm返回的是vue的实例 也就是viewModel
+    let vm = new Vue({
+        el:'#app', //querySelector
+        data:{ //这个对象会被vm所代理  ,用的是Object.defineProperty,set,get + 发布订阅模式 可以实现监控数据的变化，不兼容ie8及以下版本
+            msg:'hello world'
+        }
+    });
+</script>
+</body>
+</html>
