@@ -18,7 +18,7 @@
                     购物车
                 </caption>
                 <tr>
-                    <th class="text-center">全选</th>
+                    <th class="text-center">全选 <input type="checkbox" v-model="all" @click="selectAll"></th>
                     <th class="text-center">商品</th>
                     <th class="text-center">数量</th>
                     <th class="text-center">单价</th>
@@ -29,9 +29,9 @@
                     <td><input type="checkbox" v-model="product.isSelected"></td>
                     <td>{{product.productName}}</td>
                     <td>
-                        <button>-</button>
+                        <button @click="product.productNum--">-</button>
                         <input type="text" v-model="product.productNum">
-                        <button>+</button>
+                        <button @click="product.productNum++">+</button>
                     </td>
                     <td>{{product.productPrice}}</td>
                     <td>{{product.productNum*product.productPrice}}</td>
@@ -47,6 +47,7 @@
     new Vue({
         el:'.container',
         data:{
+            all:false,
             products:[
                 {isSelected:true,productName:'iphone7',productNum:3,productPrice:3899},
                 {isSelected:false,productName:'iphone5',productNum:1,productPrice:1500},
@@ -55,7 +56,12 @@
         },
         methods:{
             remove(p){ //取数组中删除，filter
-                console.log(p);
+                this.products =  this.products.filter(item=>item!==p);
+            },
+            selectAll(){
+                this.products.forEach(item=>{
+                   item.isSelected =  this.all
+                });
             }
         }
     })
