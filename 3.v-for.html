@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    [1,2,3,5].forEach((item,index)=>{
+
+    })
+</script>
+<div id="app">
+    <!--v-for要循环谁 就写在谁的身上，默认是value in 数组  (item,index) in 数组-->
+   <ul>
+       <li v-for="(item,index) in arrs">{{item}} {{index}}</li>
+   </ul>
+    <!--对象循环 方法 bootstrap 综合实现小购物车-->
+</div>
+<!-- vue vue.common + vue.runtime import export-->
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let arr = [1,2,3];
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            arrs:arr //不能直接更改数组里的某一项，可以用新数组覆盖掉老数组
+        }
+    });
+    //vm.$set(arr,1,3); //可以使用$set来强制改变
+</script>
+</body>
+</html>

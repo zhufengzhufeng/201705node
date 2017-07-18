@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>荔枝
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--如果需要传递参数 需要加()  如果不需要则不加，否则需要自己传入event对象-->
+    <!--<button @click="a($event)">点我说我帅</button>-->
+    <input type="text" v-model="fruit" @keyup="a($event)">
+    <ul>
+        <li v-for="fruit in fruits">{{fruit}}</li>
+    </ul>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{fruits:['香蕉','西瓜','橘子'],fruit:''},
+        methods:{ //methods一般放置的是函数,一般不放置箭头函数，因为我们希望this是当前实例
+            a(event){
+                if(event.keyCode===13){
+                    this.fruits.unshift(this.fruit);
+                    this.fruit = '';
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
+
+
+<!--
+<div id="btn" onclick="fn">点我啊</div>
+<script>
+    //在原生js中需要增加括号
+    console.log(btn.onclick);
+    function fn() {
+        alert(1)
+    }
+</script>-->
