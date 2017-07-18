@@ -37,8 +37,40 @@
                     <td>{{product.productNum*product.productPrice}}</td>
                     <td><button class="btn btn-danger btn-xs" @click="remove(product)">删除</button></td>
                 </tr>
-
+                <tr>
+                    <!--sum() 非常的暴力 任何数据变化都会导致sum重新执行-->
+                    <td colspan="6">总价格 {{sum()}}</td>
+                </tr>
             </table>
+            <form>
+                <div class="form-group">
+                    <label for="productName"
+                           class="control-label"
+                    >
+                        商品名称
+                    </label>
+                    <input type="text"
+                           id="productName"
+                           class="form-control"
+                           autocomplete="off"
+                           placeholder="请输入商品名称"
+                           v-model="product.productName">
+                </div>
+                <div class="form-group">
+                    <label for="productPrice" class="control-label">商品价格</label>
+                    <input type="text"
+                           id="productPrice"
+                           class="form-control"
+                           autocomplete="off"
+                           placeholder="请输入商品价格"
+                           v-model="product.productPrice"
+                    >
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="button" @click="add">添加</button>
+                    <button class="btn btn-warning" type="button">重置</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -48,6 +80,12 @@
         el:'.container',
         data:{
             all:false,
+            product:{ //虽然添加时不需要isSelected，productNum但是 我们操作的时候是需要这两个属性，如果没声明要更改的话，是不会受影响的，所以必须先声明
+              productName:'',
+              productPrice:'',
+              isSelected:false,
+              productNum:1
+            },
             products:[
                 {isSelected:true,productName:'iphone7',productNum:3,productPrice:3899},
                 {isSelected:false,productName:'iphone5',productNum:1,productPrice:1500},
@@ -67,10 +105,33 @@
                 //去数组中查 根据当前是否有false，有的话 给全选赋值
                 let flag = this.products.some(item=>!item.isSelected);//flag如果为true表示找到了isSelected为false的项
                 this.all = !flag;
-            }
+            },
+            add(){
+                //合并对象
+                this.products.push(this.product);
+                this.product = { //要重新赋值 否则会导致每次放入的对象是同一个
+                    productName:'',
+                    productPrice:'',
+                    isSelected:false,
+                    productNum:1
+                }
+            },
+            sum(){
+                return this.products.reduce((prev,next)=>{
+                    if(next.isSelected){ //如果下一个选中了 累加
+                        return prev+next.productNum*next.productPrice;
+                    }else{
+                        return prev
+                    }
+                },0);
+            },
         }
     })
     //添加的这一项 要包含所有受控制的属性 {isSelectd:true,productNum:1}
+
+    /*var obj  = {name:12};
+    var obj2= {age:2};
+    console.log({...obj,...obj2});*/
 </script>
 </body>
 </html>
