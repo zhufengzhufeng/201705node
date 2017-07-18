@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<!--基本样式  增强样式-->
+<!--bootstrap 有很多常用颜色
+    primary 深蓝色
+    info 浅蓝色 warning黄色 danger 红色 success 绿色 default 灰色-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <caption class="h3 text-warning">
+                    购物车
+                </caption>
+                <tr>
+                    <th class="text-center">全选</th>
+                    <th class="text-center">商品</th>
+                    <th class="text-center">数量</th>
+                    <th class="text-center">单价</th>
+                    <th class="text-center">小计</th>
+                    <th class="text-center">操作</th>
+                </tr>
+                <tr class="text-center" v-for="product in products">
+                    <td><input type="checkbox" v-model="product.isSelected"></td>
+                    <td>{{product.productName}}</td>
+                    <td>
+                        <button>-</button>
+                        <input type="text" v-model="product.productNum">
+                        <button>+</button>
+                    </td>
+                    <td>{{product.productPrice}}</td>
+                    <td>{{product.productNum*product.productPrice}}</td>
+                    <td><button class="btn btn-danger btn-xs" @click="remove(product)">删除</button></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'.container',
+        data:{
+            products:[
+                {isSelected:true,productName:'iphone7',productNum:3,productPrice:3899},
+                {isSelected:false,productName:'iphone5',productNum:1,productPrice:1500},
+                {isSelected:true,productName:'iphone plus',productNum:2,productPrice:6899}
+            ]
+        },
+        methods:{
+            remove(p){ //取数组中删除，filter
+                console.log(p);
+            }
+        }
+    })
+</script>
+</body>
+</html>
