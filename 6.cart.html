@@ -26,7 +26,7 @@
                     <th class="text-center">操作</th>
                 </tr>
                 <tr class="text-center" v-for="product in products">
-                    <td><input type="checkbox" v-model="product.isSelected"></td>
+                    <td><input type="checkbox" v-model="product.isSelected" @click="selectOne"></td>
                     <td>{{product.productName}}</td>
                     <td>
                         <button @click="product.productNum--">-</button>
@@ -62,9 +62,15 @@
                 this.products.forEach(item=>{
                    item.isSelected =  this.all
                 });
+            },
+            selectOne(){
+                //去数组中查 根据当前是否有false，有的话 给全选赋值
+                let flag = this.products.some(item=>!item.isSelected);//flag如果为true表示找到了isSelected为false的项
+                this.all = !flag;
             }
         }
     })
+    //添加的这一项 要包含所有受控制的属性 {isSelectd:true,productNum:1}
 </script>
 </body>
 </html>
