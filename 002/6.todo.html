@@ -26,10 +26,18 @@
                         <div class="panel-body">
                             <ul class="list-group">
                                 <li class="list-group-item" v-for="item
-in newTodos">
-                                    <input type="checkbox" v-model="item.isSelected">
-                                    <span>{{item.title}}</span>
-                                    <button class="btn btn-danger btn-xs pull-right" @click="remove(item)">&times;</button>
+in newTodos" @dblclick="change(item)">
+                                    <div v-show="item!=c">
+                                        <input type="checkbox" v-model="item.isSelected">
+                                        <span>{{item.title}}</span>
+                                        <button class="btn btn-danger btn-xs pull-right" @click="remove(item)">&times;</button>
+                                    </div>
+                                    <!--拿到当前的这一项 和循环的每一项比 如果相等则显示输入框-->
+                                    <div v-show="item==c">
+                                        <!--当前哪个输入框需要获取焦点 我就给这个输入框 加一个获取焦点-->
+                                        <!-- 自定义指令 如果当前指令的值 是true 就让这个输入框获取焦点-->
+                                        <input type="text" v-model="item.title" v-auto-focus="item==c" @blur="reset" @keyup.13="reset">
+                                    </div>
                                 </li>
 
                             </ul>
