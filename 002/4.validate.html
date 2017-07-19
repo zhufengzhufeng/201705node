@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+    <!--vue-validator-->
+    <label for="username" class="control-label">用户名</label>
+    <input type="text" id="username" class="form-control" v-model="input">
+    <!--v-show 适合频繁切换dom元素的显示和隐藏 if使dom元素 删除或者增加-->
+    <div v-show="flag" class="alert alert-danger">对不起用户名太短了</div>
+    <div v-show="flag1" class="alert alert-danger">对不起用户名太长了</div>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{input:''},
+        computed:{ //根据已有的属性 计算出新的属性来
+            flag(){//如果只写一个 是get方法
+                return this.input.length<3;
+            },
+            flag1(){
+                return this.input.length>6;
+            }
+        }
+    })
+</script>
+</body>
+</html>
