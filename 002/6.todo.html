@@ -20,21 +20,18 @@
                 <div class="col-md-offset-3 col-md-6">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
-                            <h4 class="text-danger">亲，你还有 x 件事要办理</h4>
-                            <input type="text" class="form-control" placeholder="请输入要办理的事情">
+                            <h4 class="text-danger">亲，你还有 {{count}} 件事要办理</h4>
+                            <input type="text" class="form-control" placeholder="请输入要办理的事情" v-model="todo.title" @keyup.enter="addOne">
                         </div>
                         <div class="panel-body">
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <input type="checkbox">
-                                    <span>晚上回家睡觉</span>
-                                    <button class="btn btn-danger btn-xs pull-right">&times;</button>
+                                <li class="list-group-item" v-for="item
+in todos">
+                                    <input type="checkbox" v-model="item.isSelected">
+                                    <span>{{item.title}}</span>
+                                    <button class="btn btn-danger btn-xs pull-right" @click="remove(item)">&times;</button>
                                 </li>
-                                <li class="list-group-item">
-                                    <input type="checkbox">
-                                    <span>晚上回家睡觉</span>
-                                    <button class="btn btn-danger btn-xs pull-right">&times;</button>
-                                </li>
+
                             </ul>
                         </div>
                         <div class="panel-footer">
