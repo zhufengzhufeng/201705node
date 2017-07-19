@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+    <table class="table table-responsive">
+        <tr>
+            <th>全选 <input type="checkbox" v-model="all"></th>
+            <th>商品价格</th>
+            <th>商品数量</th>
+        </tr>
+        <tr v-for="(item,index) in products">
+            <td><input type="checkbox" v-model="item.isSelected"></td>
+            <td>{{item.price}}</td>
+            <td><input type="text" v-model="item.num"></td>
+        </tr>
+        <tr>
+            <td>总价{{sum}}</td>
+        </tr>
+    </table>
+</div>
+<!--计算属性 {{sum()}}一般不能写成这个样子-->
+<!--虽然叫属性 要写成函数格式-->
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            products: [{price: 30, num: 3, isSelected: true}, {price: 30, num: 3, isSelected: true}]
+        },
+        methods: {},//事件类
+        computed: { //计算属性，根据数据计算出的新值
+            //sum函数 只当数组中价格数量变化了 才会重新计算
+            sum(){ //sum其实是属性,用到了 就会重新计算
+                console.log('ok');
+                return this.products.reduce((prev, next) => {
+                    if (next.isSelected) {
+                        return prev + next.price * next.num;
+                    } else {
+                        return prev
+                    }
+                }, 0);
+            },
+            a:{
+                get(){ //当获取a的时候执行 ,当获取a值时 可以计算值赋予a
+                    console.log('get');
+                },
+                set(val){//当给a设置值的时候执行,val代表要设置的值，当给a设置时 ，可以影响其他值
+                    console.log('set');
+                }
+            },
+            all:{
+                get(){ //some 如果有true返回true 如果为false，继续循环直到全为false 返回false
+                    let flag = this.products.some(item=>{
+                        return !item.isSelected
+                    });
+                    return !flag
+                },
+                set(val){ //当给全选赋予值的时候 影响数组其他项发生变化
+                    this.products.forEach(item=>item.isSelected = val);
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

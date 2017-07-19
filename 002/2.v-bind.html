@@ -19,10 +19,9 @@
     <!--写到数组中都会生效，如果加单引号则是字符串-->
     <div :class="[x,'b']">我很帅</div>
     <div :title="msg">划过显示标题</div>
-
     <!--将arr数组遍历成列表 隔行变色-->
     <ul>
-        <li v-for="(item,index) in arr" :class="{b:index%2}">{{item}}</li>
+        <li v-for="(item,index) in arr" :class="{b:index%2,c:!(index%2)}">{{item}}</li>
     </ul>
 
     <!--行内样式 -->
