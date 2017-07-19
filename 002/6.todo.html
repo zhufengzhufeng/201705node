@@ -36,9 +36,9 @@ in newTodos">
                         </div>
                         <div class="panel-footer">
                             <ul class="nav nav-pills">
-                                <li class="active"><a href="#complete">全部</a></li>
-                                <li><a href="#finish">已完成</a></li>
-                                <li><a href="#unfinish">未完成</a></li>
+                                <li :class="{active:location=='complete'}"><a href="#complete">全部</a></li>
+                                <li :class="{active:location=='finish'}"><a href="#finish">已完成</a></li>
+                                <li :class="{active:location=='unfinish'}"><a href="#unfinish">未完成</a></li>
                             </ul>
                         </div>
                     </div>
@@ -49,12 +49,12 @@ in newTodos">
 </div>
 <script src="node_modules/vue/dist/vue.js"></script>
 <script src="todo.js"></script>
-<!--1.渲染数据列表，根据定义的数据渲染-->
-<!--2.删除列表中某一项-->
-<!--3.实现添加功能，获取未选中的个数-->
+<!--1.渲染数据列表，根据定义的数据渲染  √-->
+<!--2.删除列表中某一项 √-->
+<!--3.实现添加功能，获取未选中的个数 √-->
 <!--4.通过动态样式 添加删除效果-->
-<!--5.实现导航切换效果-->
-<!--6.实现双击输入框 获取焦点 可以更改内容-->
+<!--5.实现导航切换效果 √-->
+<!--6.实现双击输入框 获取焦点 可以更改内容 -->
 <!--7.通过 localStorage存储到本地 实现本地存储-->
 </body>
 </html>
