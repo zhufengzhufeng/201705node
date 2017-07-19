@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .a{ color: yellow}
+        .b{background: blue}
+        .c{background: red}
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--绑定动态属性 需要:src="值"-->
+    <!--style 和class 一种是数组 一种是对象-->
+    <img :src="src" alt=""  :width="w">
+    <!--动态绑定class,动态绑定的class和以前的不产生任何冲突-->
+    <div :class="{a:font,b:back}" class="c">vue</div>
+    <!--写到数组中都会生效，如果加单引号则是字符串-->
+    <div :class="[x,'b']">我很帅</div>
+    <div :title="msg">划过显示标题</div>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            x:'a',
+            y:'b',
+            font:true,
+            back:true,
+            msg:'哈哈',
+            w:'100px',
+            src:'http://www.zhufengpeixun.cn/files/system/2016/02-02/124609108e2f067945.png?6.16.3'
+        }
+    })
+</script>
+</body>
+</html>
