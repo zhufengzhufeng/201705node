@@ -26,7 +26,7 @@
                         <div class="panel-body">
                             <ul class="list-group">
                                 <li class="list-group-item" v-for="item
-in todos">
+in newTodos">
                                     <input type="checkbox" v-model="item.isSelected">
                                     <span>{{item.title}}</span>
                                     <button class="btn btn-danger btn-xs pull-right" @click="remove(item)">&times;</button>
@@ -36,9 +36,9 @@ in todos">
                         </div>
                         <div class="panel-footer">
                             <ul class="nav nav-pills">
-                                <li class="active"><a href="">全部</a></li>
-                                <li><a href="">已完成</a></li>
-                                <li><a href="">未完成</a></li>
+                                <li class="active"><a href="#complete">全部</a></li>
+                                <li><a href="#finish">已完成</a></li>
+                                <li><a href="#unfinish">未完成</a></li>
                             </ul>
                         </div>
                     </div>
