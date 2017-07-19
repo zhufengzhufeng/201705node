@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">TodoList</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h4 class="text-danger">亲，你还有 x 件事要办理</h4>
+                            <input type="text" class="form-control" placeholder="请输入要办理的事情">
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input type="checkbox">
+                                    <span>晚上回家睡觉</span>
+                                    <button class="btn btn-danger btn-xs pull-right">&times;</button>
+                                </li>
+                                <li class="list-group-item">
+                                    <input type="checkbox">
+                                    <span>晚上回家睡觉</span>
+                                    <button class="btn btn-danger btn-xs pull-right">&times;</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-footer">
+                            <ul class="nav nav-pills">
+                                <li class="active"><a href="">全部</a></li>
+                                <li><a href="">已完成</a></li>
+                                <li><a href="">未完成</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="todo.js"></script>
+<!--1.渲染数据列表，根据定义的数据渲染-->
+<!--2.删除列表中某一项-->
+<!--3.实现添加功能，获取未选中的个数-->
+<!--4.通过动态样式 添加删除效果-->
+<!--5.实现导航切换效果-->
+<!--6.实现双击输入框 获取焦点 可以更改内容-->
+<!--7.通过 localStorage存储到本地 实现本地存储-->
+</body>
+</html>
