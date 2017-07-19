@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--.stop阻止冒泡-->
+<!--.capture捕获 先捕获在冒泡-->
+<!--.self 绑定事件 可以只绑定给自己-->
+<!--.prevent-->
+<!--.65 键盘事件-->
+<!-- 多次绑定修饰符事件 .stop.prevent-->
+<div id="app">
+    <input type="text" @keyup.esc.enter="son">
+    <a href="http://www.zhufengpeixun.cn" @click.prevent="son">去珠峰</a>
+    <div @click.capture="grandparent">
+        爷爷
+        <div @click.self="parent">
+            父亲
+            <div @click="son">
+            孙子
+            </div>
+        </div>
+    </div>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<!--捕获？ 冒泡？-->
+<script>
+    let vm = new Vue({ //根组件
+        el:'#app',
+        //template:'<div>我很帅</div>' //组件模板中只能有一个根元素
+        methods:{
+            grandparent(){
+                alert('grandparent')
+            },
+            parent(){
+                alert('parent')
+            },
+            son(e){
+                alert('son');
+                //e.stopPropagation()
+                //e.cancelBubble = true
+            }
+        }
+    })
+</script>
+</body>
+</html>
