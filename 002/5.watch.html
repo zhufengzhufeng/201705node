@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--watch 观察当变化时执行一件事情 可以写异步的方法-->
+<div id="app">
+    {{heart}}
+    <button @click="change1">变心</button>
+    <button @click="change2">变美</button>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{heart:'开心'},
+        methods:{
+            change1(){
+                this.heart = '不开心';
+            },
+            change2(){
+                this.heart = '变美';
+            }
+        },
+        watch:{//观察heart的变量 只要变量放生变化 就会弹出结果
+           /* heart(){
+                setTimeout(()=>{
+                    alert('我很帅'); //当值变化后执行对应的逻辑
+                },2000)
+            }*/
+            heart:{
+                handler(){
+                    setTimeout(()=>{
+                        alert('我很帅'); //当值变化后执行对应的逻辑
+                    },2000)
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
