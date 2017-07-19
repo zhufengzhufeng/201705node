@@ -19,6 +19,15 @@
     <!--写到数组中都会生效，如果加单引号则是字符串-->
     <div :class="[x,'b']">我很帅</div>
     <div :title="msg">划过显示标题</div>
+
+    <!--将arr数组遍历成列表 隔行变色-->
+    <ul>
+        <li v-for="(item,index) in arr" :class="{b:index%2}">{{item}}</li>
+    </ul>
+
+    <!--行内样式 -->
+    <div :style="{backgroundColor: 'red',color:'yellow'}">红的</div>
+    <div :style="[{backgroundColor: 'red'},{color:'yellow'}]">红的</div>
 </div>
 <script src="node_modules/vue/dist/vue.js"></script>
 <script>
@@ -26,6 +35,7 @@
         el:'#app',
         data:{
             x:'a',
+            arr:[1,2,3,4,5,6],
             y:'b',
             font:true,
             back:true,
