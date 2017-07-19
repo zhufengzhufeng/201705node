@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--beforeCreate(data methods都不存在) created ajax请求
+    beforeMount mounted
+    beforeUpdate updated
+    beforeDestroy destroyed
+-->
+<div id="app">{{a}}</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+   let vm = new Vue({
+       data:{a:1},
+       beforeCreate(){ //创建之前
+            alert('创建前')
+       },
+       created(){ //创建完成，只要是获取数据 都在created中获取
+            alert('创建完成')
+       },
+       beforeMount(){
+           alert('挂载前')
+       },
+       mounted(){ //已经插入到div中，在这里可以获取真实dom元素
+           alert('挂载完成')
+       },
+       beforeUpdate(){ //只有页面更改时 才会触发update方法
+           alert('开始更新前')
+       },
+       updated(){
+           alert('更新后')
+       },
+       beforeDestroy(){ //结束定时器  或者 移除监听
+           alert('销毁前')
+       },
+       destroyed(){ //会自动移除所有监听
+           alert('销毁后')
+       }
+   }).$mount('#app');//手动挂载
+    vm.$destroy()
+</script>
+</body>
+</html>
