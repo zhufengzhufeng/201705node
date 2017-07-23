@@ -8,9 +8,6 @@ Girl.prototype.on = function (eventName,callback) { //订阅
         this._events[eventName] = [callback];
     }
 };
-
-
-
 Girl.prototype.removeListener = function (eventName,callback) { //{'女生失恋':[cry,eat]}
     let arr = this._events[eventName];
     if(arr){
