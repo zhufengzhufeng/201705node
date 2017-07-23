@@ -7,7 +7,7 @@ function Parent(name) {
 }
 Parent.prototype.eat = '吃';
 function Child(name,age) {
-    //Parent.call(this,name);
+    //Parent.call(this,name); //继承父类私有属性
     this.age = age;
 }
 // typeof constructor instanceof Object.prototype.toString.call()
