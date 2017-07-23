@@ -1,13 +1,12 @@
 {
-  "name": "jw-handsom",
+  "name": "4.npm",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^2.1.0"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "less": "^2.7.2"
+  }
 }
