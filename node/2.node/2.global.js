@@ -42,8 +42,12 @@ console.log(process.pid);
 console.log(process.env); //在开发时会设置环境变量
 let url = ''; //上线时 不会设置node_env 所以会自动采用下面的路径
 if(process.env.NODE_ENV=='DEV'){
-    url = 'http://localhost:3000';
+      url = 'http://localhost:3000';
 }else{
-    url = 'http://www.baidu.com';
+      url = 'http://www.baidu.com';
 }
 console.log(url);
+process.nextTick(function () { //异步方法
+    console.log('nextTick');
+});
+//异步方法 setTimeout nextTick setImmediate
