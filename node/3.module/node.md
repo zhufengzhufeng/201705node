@@ -59,6 +59,11 @@ npm install jquery@2.1.0 --save
 > 安装可以通过npm 和 yarn
 
 ## 发布包
+- 登录账号 保证当前在npm上
+```
+nrm use npm
+npm addUser 如果没有则是注册 有了则是登录
+```
 
 ## 核心模块
 - util  继承

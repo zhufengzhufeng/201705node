@@ -1,10 +1,11 @@
 {
-  "name": "4.npm",
+  "name": "jw-handsome",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^2.1.0"
+    "jquery": "^2.1.0",
+    "xuedabao-pack": "^1.0.0"
   },
   "devDependencies": {
     "less": "^2.7.2"
