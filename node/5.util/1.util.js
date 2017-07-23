@@ -1,20 +1,27 @@
 //node自带的模块叫核心模块 内置模块，用法同第三方模块，但是不需要下载
 let util = require('util');
+//util.inherits(Child,Parent); //只继承公有
 //实现继承 实现一些类型判断
 function Parent(name) {
     this.name = name;
 }
 Parent.prototype.eat = '吃';
 function Child(name,age) {
-    Parent.call(this,name);
+    //Parent.call(this,name);
     this.age = age;
 }
-//4.class extends super
+// typeof constructor instanceof Object.prototype.toString.call()
+console.log(util.isArray(new RegExp())); //提供了很多判断类型的方法
 
-
-//3.只继承私有
+//5.inherits node自带的方法
+Object.setPrototypeOf(Child.prototype,Parent.prototype);//es6的方法 只继承公有属性
 let child = new Child(1,2);
 console.log(child.eat);
+//4.class extends super
+
+//3.只继承私有
+/*let child = new Child(1,2);
+console.log(child.eat);*/
 
 //2.只继承公有属性
 /*function create(Pproto) {

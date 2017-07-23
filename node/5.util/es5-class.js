@@ -9,5 +9,8 @@ Person.a = function () {
 };
 function Girl(name,age) {
     this.age = age;
-    Person.call(this,name)
+    Person.call(this,name);
 }
+Girl.prototype = Object.create(Person.prototype);
+let girl = new Girl(1,2);
+console.log(girl.name);

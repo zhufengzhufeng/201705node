@@ -16,4 +16,6 @@ class Girl extends Person {
     }
 }
 let girl = new Girl(1,2);
+console.log(girl.name);
+console.log(girl.age);
 Girl.a(); //子类可以调用父类的静态方法
