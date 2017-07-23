@@ -5,18 +5,26 @@ function Parent(name) {
     this.name = name;
 }
 Parent.prototype.eat = '吃';
-function Child(age) {
+function Child(name,age) {
+    Parent.call(this,name);
     this.age = age;
 }
+//4.class extends super
+
+
+//3.只继承私有
+let child = new Child(1,2);
+console.log(child.eat);
+
 //2.只继承公有属性
-function create(Pproto) {
+/*function create(Pproto) {
     let Fn = function () {};// 声明一个空函数
     Fn.prototype = Pproto;//将函数的公有方法指向父类
     return new Fn //构造当前函数的实例
 }
 Child.prototype = create(Parent.prototype);
 let child = new Child();
-console.log(child.eat);
+console.log(child.eat);*/
 
 /*Child.prototype.__proto__ = Parent.prototype;
 let child = new Child();
