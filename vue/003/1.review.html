@@ -6,10 +6,11 @@
 </head>
 <body>
 <div id="app"></div>
+
 <script src="node_modules/vue/dist/vue.js"></script>
 <script>
     // 将数据都挂载在viewModel上 双向数据绑定（输入框 input元素 textarea select）
-    let vm = new Vue({
+    let vm = new Vue({ //组件
        el:'#app',//挂载点，数据应用到哪里
        // 钩子函数
        methods:{}, //自定义的方法
