@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let hate = { //在子组件中不能直接使用父组件的数据
+        template:'<h1>{{m}} {{a}}</h1>',
+        props:['m','a'], //接收父组件传递过来的数据，默认会把当前数据挂载在当前实例 this.m
+        data(){
+            return {msg:'我恨你'}
+        }
+    };
+    let vm = new Vue({
+        data:{
+            msg:'我恨你'
+        },
+        template:`<div>
+                    <h1>{{msg}}</h1>
+                    <hate :m="msg" :a="1"></hate>
+                  </div>`, //通过m属性传递msg给子组件,传递的是变量代表的值，所以通过冒号传递
+        components:{
+            hate
+        }
+    }).$mount('#app');//手动挂载
+</script>
+</body>
+</html>

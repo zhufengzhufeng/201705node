@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //组件使用的三部曲
+    //1.引用 2.注册 3.在父级模板中以标签的形式引用
+    let son = {
+        template: '<h1>儿子</h1>'
+    };
+    let hello = {
+        template: '<h1>我爱你 <son></son></h1>',
+        components:{
+            son
+        }
+    };
+    let my = {template: '<h1>我恨你</h1>'};
+    let vm = new Vue({
+        el: '#app',
+        template: '<div><hello></hello><my></my></div>',
+        components: {hello, my}
+    });
+</script>
+</body>
+</html>

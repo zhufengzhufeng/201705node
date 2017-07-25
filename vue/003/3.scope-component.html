@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+ //只能在某一个组件下使用，定义的时候，要定义在某个组件下面
+ //1.组件使用三部分 1)引用 2) 定义这个组件 3)通过标签引用
+ let vm = new Vue({
+     el:'#app',
+     template:'<div><hello/><my></my></div>',
+     components:{ //定义在里面的就叫局部组件，局部组件只能在父级的模板中使用
+         'hello':{
+             template:'<h1>我爱你 <hello-child></hello-child></h1>',
+             components:{
+                 'hello-child':{
+                     template:'<h1>儿子</h1>',
+                 }
+             }
+         },
+         'my':{
+             template:'<h1>我恨你</h1>'
+         }
+     }
+ })
+</script>
+</body>
+</html>
