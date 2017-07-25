@@ -8,8 +8,9 @@
 <div id="app"></div>
 <template id="c1">
     <div>
+        {{say1}}
         <div>组件1</div>
-        <button>给c2传递值</button>
+        <button @click="send">给c2传递值</button>
     </div>
 </template>
 <template id="c2">
@@ -21,18 +22,29 @@
 <script src="node_modules/vue/dist/vue.js"></script>
 <script>
     let eventBus = new Vue(); //构建一个实例 通过同一个实例发射事件和监听事件
+    //缺点 一呼百应，非常冗余复杂，交互困难
     let c1 = {
         template:'#c1',
         data(){
             return {say1:'我很帅'}
         },
+        methods:{
+            send(){
+                eventBus.$emit('送给c2',this.say1)
+            }
+        },
         created(){
-            eventBus.$on('送给c1',function (val) {
-                alert(val);
-            })
+            eventBus.$on('送给c1', (val)=> {
+                this.say1 = val;
+            });
         }
     };
     let c2 = {
+        mounted(){
+          eventBus.$on('送给c2',function (val) {
+              alert(val)
+          })
+        },
         template:'#c2',
         data(){
             return {say2:'我很漂亮'}
