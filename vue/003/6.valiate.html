@@ -10,13 +10,24 @@
 <script>
     let App = {
         template:'<div>空 {{msg}}</div>',
+        //props:[] 不能校验
         props:{ //校验传递内容
-            msg:{required:true} //require true校验是否传递了此属性，如果是空也可以
+            //msg:{required:true} //require true校验是否传递了此属性，如果是空也可以
+            //msg:{default:'我爱你'}//如果没有传递属性使用默认值
+            //msg:{type:[String,Number,Boolean,Object,Function]} //通过冒号传递的数字才是数字类型,数组是或的关系 写在数组里的都可以,
+            msg:{
+                /**
+                 * @param val 代表当前传递过来的参数
+                 */
+                validator(val) { //验证器,如果此函数返回true 表示通过校验，返回false表示未通过
+                    return val==='我爱你'?true:false
+                }
+            }
         }
     };
     let vm = new Vue({
         el:'#app',
-        template:`<App msg=""/>`,
+        template:`<App msg="我爱你"/>`,
         components:{
             App
         }
