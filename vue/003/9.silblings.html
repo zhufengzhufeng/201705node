@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<template id="c1">
+    <div>
+        <div>组件1</div>
+        <button>给c2传递值</button>
+    </div>
+</template>
+<template id="c2">
+    <div>
+        <div>组件2</div>
+        <button @click="send">给c1传递值</button>
+    </div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let eventBus = new Vue(); //构建一个实例 通过同一个实例发射事件和监听事件
+    let c1 = {
+        template:'#c1',
+        data(){
+            return {say1:'我很帅'}
+        },
+        created(){
+            eventBus.$on('送给c1',function (val) {
+                alert(val);
+            })
+        }
+    };
+    let c2 = {
+        template:'#c2',
+        data(){
+            return {say2:'我很漂亮'}
+        },
+        methods:{
+            send(){
+                eventBus.$emit('送给c1',this.say2)
+            }
+        }
+    };
+    let vm = new Vue({
+        el:'#app',
+        template:'<div><c1></c1><c2></c2></div>',
+        components:{
+            c1,c2
+        }
+    });
+</script>
+</body>
+</html>
