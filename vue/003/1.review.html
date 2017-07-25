@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // 将数据都挂载在viewModel上 双向数据绑定（输入框 input元素 textarea select）
+    let vm = new Vue({
+       el:'#app',//挂载点，数据应用到哪里
+       // 钩子函数
+       methods:{}, //自定义的方法
+       // beforeCreate created(已经完成了数据的绑定，事件的绑定可以调用ajax)
+       // beforeMount mounted  此时可以获取真实的dom元素
+       // beforeUpdate updated 只要视图发生变化就会调用updated
+       // beforeDestroy destroyed 在beforeDestroy 会在此时移除定时器 移除一些监听事件
+       directives:{},//自定义指令 指令v-xxx html的属性 指定一些功能，这里可以操作dom,写自己的逻辑和功能
+       watch:{}, //可以写异步，当值变化了就可以触发自己的函数，默认只监控一层
+       computed:{}, //get 方法 set 方法 get是根据其他人的值计算出自己的值，set给自己设置值时影响其他人的值，只能写同步的
+       data:{} //数据驱动，显示是取决于数据的
+        //所有函数中的this基本指向的都是当前的实例，不能使用箭头函数，否则会导致this错乱
+    });
+</script>
+</body>
+</html>
