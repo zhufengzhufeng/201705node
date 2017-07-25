@@ -20,18 +20,18 @@
                  * @param val 代表当前传递过来的参数
                  */
                 validator(val) { //验证器,如果此函数返回true 表示通过校验，返回false表示未通过
-                    return val==='我爱你'?true:false
+                    return val==='我爱你';
                 }
-            }
+            },
+            flag:{type:Boolean}
         }
     };
     let vm = new Vue({
         el:'#app',
-        template:`<App msg="我爱你"/>`,
-        components:{
-            App
-        }
+        template:`<App msg="我爱你" :flag="true" :a="1"/>`,
+        components:{ App }
     });
+
 </script>
 </body>
 </html>

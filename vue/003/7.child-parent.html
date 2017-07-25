@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+   //发布订阅模式 on emit
+    let App = {
+        //想通过点击改变父亲数据，想法1：父亲将属性传递给儿子，儿子把数据改掉
+        template:`<div>
+            <button @click="change">点我啊</button>
+        </div>`,
+        props:['m'],
+        methods:{
+            change(){ //不能更改父级传递过来的属性，想改也只能自己声明一下 改自己身上的
+                //this.m = '我恨你' //错误写法
+                this.$emit('child-msg','我喜欢你');//发布 消息给父亲
+            }
+        }
+    };
+    let vm = new Vue({
+        el:'#app',
+        data:{msg:'我爱你'},     // 父亲绑定一个自定义事件来监听儿子的动作，当儿子发射事件后，执行此fn函数                            this.$on('child-msg',fn)
+        template:'<div><App :m="msg" @child-msg="fn"/>{{msg}}</div>',
+        methods:{
+            fn(msg){
+                this.msg = msg;
+            }
+        },
+        components:{ App }
+    });
+    //vuex  同一管理数据
+</script>
+</body>
+</html>

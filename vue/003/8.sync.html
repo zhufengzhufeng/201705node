@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let App = {
+        template:`<div>
+            <button @click="change">点我啊</button>
+        </div>`,
+        props:['m'],
+        methods:{
+            change(){
+                this.$emit('update:m','我喜欢你');
+            }
+        }
+    };
+    let vm = new Vue({
+        el:'#app',
+        data:{msg:'我爱你'},
+        //template:'<div><App :m="msg" @child-msg="val=>msg=val"/>{{msg}}</div>',
+        // .sync相当于同步子组件传递过来的数据
+        template:'<div><App :m.sync="msg"/>{{msg}}</div>',
+        components:{ App }
+    });
+    //vuex  同一管理数据
+</script>
+</body>
+</html>
