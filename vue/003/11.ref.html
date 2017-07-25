@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //ref 引用
+    let hello = {
+        template:'<h1>你好</h1>',
+        methods:{fn(){alert(1)}}
+    };
+    let vm = new Vue({
+        el:'#app',
+        //给div起了一个别名 ref = "content",vue会自动将这个元素放到 this.$refs
+        template:`<div ref="content">
+            vue view vue
+            <button @click="change">点击变红</button>
+            <hello ref="hello"></hello>
+        </div>`,
+        components:{
+            hello
+        },
+        methods:{
+            change(){ //this.$refs存储着所有的ref对象 真实的dom
+               this.$refs.hello.fn();//可以通过refs属性拿到组件的实例hello中的this
+               this.$refs.content.style.background = 'red';
+            }
+        }
+    });
+</script>
+</body>
+</html>
