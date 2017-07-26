@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/list">列表页</router-link>
+    <router-view></router-view>
+</div>
+<template id="list">
+    <div>
+        <router-link to="/list/profile">个人信息</router-link>
+        <router-link to="/list/salary">工资</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let Home = {template:'<div>首页</div>'};
+    let List = {template:'#list'};
+    let Profile = {template:'<div>个人信息</div>'}
+    let Salary = {template:'<div>工资</div>'}
+    let router = new VueRouter({
+        routes:[
+            {path:'/home',component:Home},
+            {path:'/list',component:List,
+                children:[  // /list/profile   /list/salary 子路由不能加/
+                    {path:'profile',component:Profile},
+                    {path:'salary',component:Salary},
+                ]}
+        ]
+    });
+    let vm = new Vue({
+        el:'#app',
+        router
+    });
+</script>
+</body>
+</html>
