@@ -27,6 +27,7 @@
         <div class="row">
             <div class="col-md-12">
                 <!--当路径切换的时候，这时会将组件移除掉，新的组件放进来-->
+                <!--mint.ui  element.ui-->
                 <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
                     <!--切换时默认在同一个水平面内，要两个人都绝对定位才不会出现上线窜动的问题，默认动画是同时进行-->
                     <router-view  style="position: absolute;top: 0;left: 0;width: 100%"></router-view>
@@ -38,7 +39,9 @@
 <link rel="stylesheet" href="node_modules/animate.css/animate.css">
 <!--首页的结构-->
 <template id="home">
-    <div>首页</div>
+    <div>首页
+        <button @click="$router.push('/login')"></button>
+    </div>
 </template>
 <!--个人中心的结构-->
 <template id="profile">
@@ -74,14 +77,33 @@
     let router = new VueRouter({
         routes:[
             {path:'/home',component:Home,name:'home'},
-            {path:'/profile',component:Profile,
+            {
+                path:'/profile',
+                component:Profile,
                 children:[
                     {path:'',component:Welcome},//配置默认页面
                     {path:'order/:oid',component:Order},
-                ]},
+                ],
+                meta:{need:true}//这里可以存放自定义的备注信息
+            },
             {path:'/login',component:Login},
             {path:'*',redirect:'/home'} //404的
         ]
+    });
+    //在路由切换的每一个之前都会调用
+    router.beforeEach((to,from,next)=>{ //next是一个函数 如果调用了next 表示继续执行
+        //console.log(to); //to表示去哪
+        //需要拿到 matched里的一个匹配的数组，如果其中数组某一个对象有meta属性并且needLogin是true，表示需要登录，校验是否登录，如果登录过,就继续运行，如果没登录过，跳转到登录页
+        let flag = to.matched.some(item=>item.meta.need);
+        if(flag){//查找所有匹配的是否有true
+            if(localStorage.getItem('login')==null){ //没登录
+                next({path:'/login'});
+            }else{
+                next();
+            }
+        }else{
+            next(); //如果不需要验证 直接进去即可
+        }
     });
     let vm = new Vue({
         el:'#app',
@@ -94,7 +116,7 @@
             checkLogin(){
                 if(localStorage.getItem('login') == undefined){
                     //没登录
-                    this.isLogin = true;
+                    this.isLogin = false;
                 }else{
                     this.login = true;
                 }
