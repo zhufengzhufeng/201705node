@@ -25,7 +25,7 @@
             hello
         },
         methods:{
-            change(){ //this.$refs存储着所有的ref对象 真实的dom
+            change(){ //this.$refs存储着所有的ref对象 真实的dom，
                this.$refs.hello.fn();//可以通过refs属性拿到组件的实例hello中的this
                this.$refs.content.style.background = 'red';
             }

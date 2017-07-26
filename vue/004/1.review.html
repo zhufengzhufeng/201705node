@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+    <panel title="README.MD" type="primary" @event="say">
+        <div slot="body" v-html="content2"></div>
+        <div slot="header">框架的三国时代</div>
+    </panel>
+    <panel @event="say"></panel>
+</div>
+<template id="panel">
+    <!--1.将type属性转换成 panel-传递的值 计算属性-->
+    <!--2.应用到动态的样式上 通过:class动态绑定样式-->
+    <div class="panel" :class="c">
+        <div class="panel-heading">{{title}}</div>
+        <div class="panel-body">
+            <slot name="header">三国时代</slot>
+            <slot name="body">空空如也</slot>
+            <slot name="footer">作者:jw</slot>
+        </div>
+        <div class="panel-footer">
+            <button @click="childSay">点我啊</button>
+        </div>
+    </div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let panel = {
+        template:'#panel',
+        computed:{
+            c(){ //这里的c 是根据type属性 计算出的新值，目的是获取一个panel-xxx 所以肯定调用的是get方法
+                return 'panel-'+this.type;
+            }
+        },
+        props:{
+            title:{default:'README.MD',type:String}, //title属性会挂载在当前组件的实例上 this上就就拥有了title属性
+            type:{default:'danger'} //this.type = 'primary'
+        },
+        methods:{
+            childSay(){
+                this.$emit('event',this.title);
+            }
+        }
+    };
+    let vm = new Vue({ //根实例
+        el:'#app',
+        data:{
+            content1:'<div>组件+路由</div>',
+            content2:'<div>脚手架</div>'
+        },
+        components:{
+            panel:panel
+        },
+        methods:{
+            //在组件内部要调用父组件的方法
+            say(val){
+                alert(val)
+            }
+        }
+    });
+</script>
+</body>
+</html>
