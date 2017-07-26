@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .active{color:red}
+    </style>
+</head>
+<body>
+<div id="app">
+    <router-link to="/article/1">第1篇</router-link>
+    <!--如果通过对象传递params属性 需要给路径起别名,否则params不生效-->
+    <router-link :to="{name:'article',params:{id:2}}">第2篇</router-link>
+    <router-view ></router-view>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let Article = {
+        template:'<div>第{{id}}篇文章</div>',
+        computed:{
+            id(){
+                return this.$route.params.id;
+            }
+        }
+    };
+    let router = new VueRouter({
+        routes:[
+            // /article/1/jw /article/:id/:name => {id:1,name:'jw'} => this.$route.params
+            {path:'/article/:id',component:Article,name:'article'}
+        ],
+        linkActiveClass:'active'
+    });
+    let vm = new Vue({
+        el:'#app',
+        router
+    });
+</script>
+</body>
+</html>
