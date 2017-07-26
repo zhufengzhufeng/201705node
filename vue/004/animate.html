@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/animate.css/animate.css">
+    <style>
+        .box{width: 200px;height: 200px;border-radius: 50%;background: red}
+        .zf-enter{opacity: 0}
+        .zf-enter-active{-webkit-transition: all 1s;}
+        .zf-leave-active{-webkit-transition: all 1s;opacity: 0}
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="flag = !flag">点我啊</button>
+    <!--v-if v-show v-for 实现vue的动画-->
+    <!--<transtion name="zf" ></transtion>-->
+    <transition enter-active-class="animated rotateInUpRight" leave-active-class="animated rotateOutDownLeft">
+        <!--次元素可以调用动画-->
+        <div class="box" v-show="flag">
+        </div>
+    </transition>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{flag:false}
+    });
+</script>
+</body>
+</html>

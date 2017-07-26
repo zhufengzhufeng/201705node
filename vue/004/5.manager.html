@@ -26,11 +26,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <router-view></router-view>
+                <!--当路径切换的时候，这时会将组件移除掉，新的组件放进来-->
+                <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
+                    <!--切换时默认在同一个水平面内，要两个人都绝对定位才不会出现上线窜动的问题，默认动画是同时进行-->
+                    <router-view  style="position: absolute;top: 0;left: 0;width: 100%"></router-view>
+                </transition>
             </div>
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="node_modules/animate.css/animate.css">
 <!--首页的结构-->
 <template id="home">
     <div>首页</div>
@@ -64,13 +69,15 @@
     let Home = {template:'#home'};
     let Profile = {template:'#profile'};
     let Login = {template:'#login'};
-    let Order = {template:'#order'}
+    let Order = {template:'#order'};
+    let Welcome = {template:'<div>欢迎来查看订单</div>'};
     let router = new VueRouter({
         routes:[
             {path:'/home',component:Home,name:'home'},
             {path:'/profile',component:Profile,
                 children:[
-                    {path:'order/:oid',component:Order}
+                    {path:'',component:Welcome},//配置默认页面
+                    {path:'order/:oid',component:Order},
                 ]},
             {path:'/login',component:Login},
             {path:'*',redirect:'/home'} //404的
