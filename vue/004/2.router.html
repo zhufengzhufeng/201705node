@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .router-link-active{color:red}
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--router-view 表示路由匹配成功后插入当前位置 -->
+    <!--router-link声明式导航 编程式导航-->
+    <router-link to="/home" tag="span">首页</router-link>
+    <router-link to="/list" tag="span">列表页</router-link>
+    <router-view></router-view>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    // 引入路由后 会在当前作用域下声明 VueRouter 是一个构造函数
+    // 路由:不同的路径显示不同的内容 spa 页面不刷新 内容需要变化
+    // hashHistory  browserHistory 会导致刷新时404
+    let Home = {template:'<div>首页</div>'}; // #/home
+    let List = {template:'<div>列表页</div>'}; //#/list
+    let Article = {template:'<div>这是第{{$route.params.aid}}篇文章</div>'}
+    let routes = [ //映射表 路由的匹配关系
+//        {path:'',component:Home}, //不能解决404问题
+        {path:'/home',component:Home},
+        {path:'/list',component:List},
+        //会将当前的aid 和你访问的值组成一个对象 /article/3 和 /article/:aid => {aid:3} this.$route.params上
+        {path:'/article/:aid',component:Article}, //表示后面参数可以是任意的 但是必须要有
+//        {path:'*',component:Home},//默认匹配不到全部同一个组件，路径不会跳转
+        {path:'*',redirect:'/home'} //配置404页面用的，可以实现路径的跳转
+    ];
+    let router = new VueRouter({ //默认就是hashHistory
+        //mode:'history', 转化成没有警号的状态
+        routes //注册路由表
+    });
+    let vm = new Vue({ //入口
+        el:'#app',
+        router, // 当前实例上会有两个属性 this.$route(属性) this.$router(方法)
+        components:{}
+    });
+</script>
+</body>
+</html>
