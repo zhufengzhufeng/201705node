@@ -37,11 +37,26 @@
 </template>
 <!--个人中心的结构-->
 <template id="profile">
-    <div>个人中心</div>
+    <div>
+        <div class="col-md-3">
+            <ul class="nav nav-stacked">
+                <li><router-link to="/profile/order/1">订单1</router-link></li>
+                <li><router-link to="/profile/order/2">订单2</router-link></li>
+                <li><router-link to="/profile/order/3">订单3</router-link></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <router-view></router-view>
+        </div>
+    </div>
 </template>
 <!--登录的结构-->
 <template id="login">
     <div>登录页面</div>
+</template>
+<!--订单的结构-->
+<template id="order">
+    <div>欢迎查看订单： {{$route.params.oid}}</div>
 </template>
 <script src="node_modules/vue/dist/vue.js"></script>
 <script src="node_modules/vue-router/dist/vue-router.js"></script>
@@ -49,10 +64,14 @@
     let Home = {template:'#home'};
     let Profile = {template:'#profile'};
     let Login = {template:'#login'};
+    let Order = {template:'#order'}
     let router = new VueRouter({
         routes:[
             {path:'/home',component:Home,name:'home'},
-            {path:'/profile',component:Profile},
+            {path:'/profile',component:Profile,
+                children:[
+                    {path:'order/:oid',component:Order}
+                ]},
             {path:'/login',component:Login},
             {path:'*',redirect:'/home'} //404的
         ]
@@ -68,7 +87,7 @@
             checkLogin(){
                 if(localStorage.getItem('login') == undefined){
                     //没登录
-                    this.isLogin = false;
+                    this.isLogin = true;
                 }else{
                     this.login = true;
                 }
