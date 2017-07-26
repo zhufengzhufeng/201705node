@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="" class="navbar-brand">珠峰管理系统</a>
+            </div>
+            <ul class="navbar-nav nav">
+                <li><router-link :to="{path:'/home'}">首页</router-link></li>
+                <!--localStorage.setItem('login','haha')-->
+                <li v-if="!isLogin"><router-link to="/login">登录</router-link></li>
+                <template v-else>
+                    <li><router-link to="/profile">个人中心</router-link></li>
+                    <li><a>退出</a></li>
+                </template>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <router-view></router-view>
+            </div>
+        </div>
+    </div>
+</div>
+<!--首页的结构-->
+<template id="home">
+    <div>首页</div>
+</template>
+<!--个人中心的结构-->
+<template id="profile">
+    <div>个人中心</div>
+</template>
+<!--登录的结构-->
+<template id="login">
+    <div>登录页面</div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let Home = {template:'#home'};
+    let Profile = {template:'#profile'};
+    let Login = {template:'#login'};
+    let router = new VueRouter({
+        routes:[
+            {path:'/home',component:Home,name:'home'},
+            {path:'/profile',component:Profile},
+            {path:'/login',component:Login},
+            {path:'*',redirect:'/home'} //404的
+        ]
+    });
+    let vm = new Vue({
+        el:'#app',
+        data:{isLogin:true}, //本地存储中有一个值 login 如果有用户名表示登录过，如果没有则未登录
+        router,
+        created(){ //做操作检测是否登录,取一下本地看一下是否有用户名
+            this.checkLogin();
+        },
+        methods:{
+            checkLogin(){
+                if(localStorage.getItem('login') == undefined){
+                    //没登录
+                    this.isLogin = false;
+                }else{
+                    this.login = true;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
