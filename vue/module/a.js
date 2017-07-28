@@ -11,7 +11,6 @@ export function a() {
 /*2.
 * export let str = '我很帅';
 * */
-
 //3.默认导出
 let str = '我很帅';
-export default str
+export default str;

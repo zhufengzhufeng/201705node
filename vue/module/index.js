@@ -19,3 +19,5 @@ console.log(obj.str);*/
 import b from './a.js';//b代表的就是默认导出的结果
 console.log(b);
 
+//module.exports 和exports 不能共用
+//export default 和export不能共用
