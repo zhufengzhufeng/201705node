@@ -25,9 +25,11 @@ var newArr = arr.slice();
 ary[0] = 100;
 console.log(newArr);
 */
+
 var buffer = new Buffer([1,2,3]);
 let newBuffer = buffer.slice(0,1);
 newBuffer[0] = 100;
 console.log(buffer); //buffer中存放的也是引用地址
+
 
 
