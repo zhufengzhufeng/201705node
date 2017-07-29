@@ -5,8 +5,8 @@ fs.readFile('1.txt','utf8',callback);
 fs.writeFileSync('2.txt','xxx');
 fs.writeFile('2.txt','xxx',callback);*/
 function copySync(source,target) { //readFileSync writeFileSync
-    let result = fs.readFileSync(source);
-    fs.writeFileSync(target,result)
+        let result = fs.readFileSync(source);
+        fs.writeFileSync(target,result);
 }
 function copy(source,target,callback) { //readFile writeFile
     fs.readFile(source,function (err,data) {
@@ -19,3 +19,6 @@ copy('1.txt','2.txt',function (err) {
     if(err) return console.log(err);
     console.log('拷贝成功');
 });
+// 淹没可用内存，边读边写，而不是全部读到内存中，流
+
+
