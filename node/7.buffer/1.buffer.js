@@ -6,6 +6,5 @@ for(let i=1;i<=8;i++){
     total+=1*Math.pow(2,i-1)
 }
 console.log(total);
-
 //2^8-1 同样可以计算
 
