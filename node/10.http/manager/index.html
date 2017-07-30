@@ -3,7 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!--
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="col-md-6">
+                <form onsubmit="fn()">
+                    <div class="form-group">
+                        <label for="username" class="control-label">用户名</label>
+                        <input type="text" placeholder="请输入用户名" class="form-control" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">邮箱</label>
+                        <input type="email" placeholder="请输入邮箱" class="form-control" id="password">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">提交</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        用户名:xxx 邮箱:xxx
+                        <button class="pull-right btn btn-danger btn-xs">删除</button>
+                        <button class="pull-right btn btn-warning btn-xs">修改</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function fn() {
+    }
+</script>
+</body>
+</html>
+
+<!--
         RESTFul风格，路径全部统一 /user
                    通过动词区分要做什么操作
            /user get 查询  /user?id=1 获取一个 /user 获取所有
@@ -12,9 +52,3 @@
            /user post 增加
            正常风格要求 修改返回修改后的那一项 ，增加放回增加的那一项，删除返回空对象，查询一个返回查询的对象 查询数组返回数组
     -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-</head>
-<body>
-<div></div>
-</body>
-</html>
