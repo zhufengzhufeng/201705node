@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--在html中不能出现../路径 ./会被转化成/-->
-    <link rel="stylesheet" href="./style.css">
+    <!--<link rel="stylesheet" href="./style.css">-->
 </head>
 <body>
-hello 珠峰培训
-<script src="./index.js"></script>
+<!--约定一个接口 /clock -->
+<div id="time"></div>
+<script>
+    //要通过自己的服务端来访问
+    let xhr = new XMLHttpRequest(); //new xhr对象
+    xhr.open('GET','/clock',true);// 开启请求
+    xhr.responseType = 'json';
+    //onload == (readState==4 && xhr.status == 200)
+    xhr.onload = function () { //监听状态改变
+        //如果响应类型限制成了json 只能使用response
+        time.innerHTML = xhr.response.time
+    };
+    xhr.send(); //发送请求
+    //同源策略 协议 ip 端口 一个不一致都不能访问
+</script>
+<!--<script src="./index.js"></script>-->
 </body>
 </html>
