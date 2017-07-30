@@ -10,6 +10,7 @@ http.createServer(function (req,res) {
         fs.createReadStream('index.html').pipe(res);
     }
     else if(pathname === '/user'){ //路径为/user表示是对用户资源的操作
+        let id = parseInt(query.id); //获取查询参数的id 可能为undefined，默认为字符串类型
         switch (req.method){ //大写
             case 'GET':
                 res.setHeader('Content-Type','application/json;charset=utf-8');
@@ -32,6 +33,10 @@ http.createServer(function (req,res) {
             case 'PUT':
                 break;
             case 'DELETE':
+                //过滤掉数组中和当前传递相等的那一项
+                users = users.filter(item=>item.id!==id);
+                res.setHeader('Content-Type','application/json;charset=utf-8');
+                res.end(JSON.stringify(users));
                 break;
         }
     }
