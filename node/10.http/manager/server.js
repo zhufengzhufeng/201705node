@@ -30,7 +30,25 @@ http.createServer(function (req,res) {
                     res.end(JSON.stringify(users));
                 });
                 break;
-            case 'PUT':
+            case 'PUT':{
+                //find some reduce filter map
+                //1.拿到id，query.id 2.拿到修改的数据
+                    let str = '';
+                    req.on('data',function (chunk) {
+                        str+=chunk;
+                    });
+                    req.on('end',function () {
+                        let user = JSON.parse(str);
+                        users = users.map(item=>{ //映射
+                            if(item.id === id){ //如果id相同则替换成最新的
+                                return user;
+                            }
+                            return item;//其他值直接返回即可
+                        });
+                        res.setHeader('Content-Type','application/json;charset=utf-8');
+                        res.end(JSON.stringify(users));
+                    })
+                }
                 break;
             case 'DELETE':
                 //过滤掉数组中和当前传递相等的那一项

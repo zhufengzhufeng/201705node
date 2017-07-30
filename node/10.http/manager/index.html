@@ -99,6 +99,7 @@
             }
         }).then(res=>res.json()).then(data=>{
             bindHtml(data);
+            $('#myModal').modal('hide');//关闭模态框
         });
     }
     //实现删除
