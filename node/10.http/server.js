@@ -10,7 +10,9 @@ http.createServer(function (req,res) {
     }else if(pathname === '/clock'){
         let time = new Date();
         res.end(
-            JSON.stringify({time:time.toLocaleString()})
+            JSON.stringify(
+                {time:time.toLocaleString()}
+            )
         )
     }
 
