@@ -10,14 +10,14 @@
     <div class="row">
         <div class="col-md-12 ">
             <div class="col-md-6">
-                <form onsubmit="fn()">
+                <form onsubmit="fn(event)">
                     <div class="form-group">
                         <label for="username" class="control-label">用户名</label>
-                        <input type="text" placeholder="请输入用户名" class="form-control" id="username">
+                        <input type="text" placeholder="请输入用户名" class="form-control" id="username" required maxlength="5" pattern="/\d{5}/">
                     </div>
                     <div class="form-group">
-                        <label for="password" class="control-label">邮箱</label>
-                        <input type="email" placeholder="请输入邮箱" class="form-control" id="password">
+                        <label for="email" class="control-label">邮箱</label>
+                        <input type="email" placeholder="请输入邮箱" class="form-control" id="email" required>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary">提交</button>
@@ -26,18 +26,51 @@
             </div>
             <div class="col-md-6">
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        用户名:xxx 邮箱:xxx
-                        <button class="pull-right btn btn-danger btn-xs">删除</button>
-                        <button class="pull-right btn btn-warning btn-xs">修改</button>
-                    </li>
+
                 </ul>
             </div>
         </div>
     </div>
 </div>
 <script>
-    function fn() {
+    //getElementByClassName 动态的 支持dom映射
+    let oUl = document.querySelector('.list-group');  //静态的
+    //1.通过get请求获取所有用户
+    function bindHtml(data) {
+        let str = '';
+        data.forEach(item => {
+            str += `<li class="list-group-item">
+                        用户名:${item.username} 邮箱:${item.email}
+                        <button class="pull-right btn btn-danger btn-xs">删除</button>
+                        <button class="pull-right btn btn-warning btn-xs">修改</button>
+                  </li>`
+        });
+        oUl.innerHTML = str;
+    }
+    fetch('/user',{
+        method:'GET',
+        headers:{ //表示返回的数据需要是json格式
+            Accept:'application/json'
+        }
+    })
+    .then(res=>res.json()) //res.json返回的依然是一个promise 可以继续then
+    .then(data=>{
+        bindHtml(data);
+    });
+    function fn(e) {
+        //1.阻止默认行为
+        e.preventDefault();
+        let username = document.getElementById('username').value;
+        let email = document.getElementById('email').value;
+        fetch('/user',{
+            method:'POST',
+            body:JSON.stringify({username,email}), //必须传递的是对象字符串格式
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }).then(res=>res.json()).then(data=>{
+            bindHtml(data);
+        })
     }
 </script>
 </body>
