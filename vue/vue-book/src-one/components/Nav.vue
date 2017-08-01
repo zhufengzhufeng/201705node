@@ -40,5 +40,6 @@
     .router-link-active{
       color: orangered;
     }
+    background: #fff;
   }
 </style>
