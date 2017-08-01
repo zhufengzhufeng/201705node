@@ -27,7 +27,10 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      //主要以api开头的就跳转到 3000端口，开发时的解决方案上线时 会放到同一个服务器下没有跨域问题
+      '/api':'http://localhost:3000',
+    }, //代理表 可以帮我们代理数据 ,能解决跨域问题
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)

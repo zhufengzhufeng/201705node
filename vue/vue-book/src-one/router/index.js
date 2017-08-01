@@ -11,6 +11,7 @@ const routes = [
   {path:'/home',component:Home},
   {path:'/list',component:List},
   {path:'/add',component:Add},
+  {path:'*',redirect:'/home'} //配置404 匹配不到跳转到首页
 ];
 export default new VueRouter({
   routes
