@@ -3,7 +3,8 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve (dir) {
+function resolve (dir) { //src
+  //__dirname代表当前文件的绝对路径的文件夹
   return path.join(__dirname, '..', dir)
 }
 
@@ -20,22 +21,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src')
+    alias: { //别名
+      '@': resolve('src') //@符号指的是src目录 绝对路径
     }
   },
   module: {
     rules: [
-     /* {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },*/
       {
         test: /\.vue$/,
         loader: 'vue-loader',
