@@ -17,5 +17,5 @@
     }
 </script>
 <style scoped>
-  .header{background: #f1f1f1;text-align: center;height: 45px;line-height: 45px;position: fixed;width: 100%}
+  .header{background: #f1f1f1;text-align: center;height: 45px;line-height: 45px;position: fixed;width: 100%;z-index: 200}
 </style>
