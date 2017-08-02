@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bootstrap": "^3.3.7",
+    "jsonp": "^0.2.1",
     "vue": "^2.3.3",
     "vue-awesome-swiper": "^2.5.4",
     "vue-lazyload": "^1.0.6",
