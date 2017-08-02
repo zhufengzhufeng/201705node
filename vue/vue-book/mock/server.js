@@ -39,7 +39,11 @@ http.createServer(function (req, res) {
     let id = parseInt(query.id); //转换成数字类型
     if(method === 'GET'){
         if(id){ //获取一个
-
+          read(function (books) {
+            //find找到后返回那一项，找不到返回的是undefined
+            let book = books.find(item=>item.id==id);
+            res.end(JSON.stringify(book));
+          });
         }else{ // 获取全部    返回所有图书
           read(function (books) {
             res.end(JSON.stringify(books));
@@ -62,9 +66,44 @@ http.createServer(function (req, res) {
         });
       });
     }else if(method === 'PUT'){
+      /*
+        1,拿到id
+        2.获取传递的数据
+        3.读出数据去更改内容
+        4.将最新的数据写回到json中
+        5.响应结束返回修改的那一项
+      */
+      let str = '';
+      req.on('data',function (chunk) {
+        str+=chunk;
+      });
+      req.on('end',function () {
+        let book = JSON.parse(str);
+        read(function (books) {
+          books = books.map(item=>{
+            if(item.id == id){
+              return book;
+            }
+            return item;
+          });
+          write(books,function () {
+            res.end(JSON.stringify(book));
+          });
+        });
+      });
+
+
+
+
+
 
     }else if(method === 'DELETE'){
-
+        read(function (books) {
+          books = books.filter(item=>item.id !=id);
+          write(books,function () {
+             res.end(JSON.stringify({}));
+          });
+        })
     }
   }
 }).listen(3000);
