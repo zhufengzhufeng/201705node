@@ -25,7 +25,15 @@
         data () { //arr是轮播图数据 books是最新上架
             return {msg: 'hello',arr:[],books:[]}
         },
-        methods: {},
+        methods: {
+            getHot(){
+              axios.get('/api/hot').then(res=>{
+                this.books = res.data;
+              }).catch(err=>{
+                console.log(err);
+              });
+            }
+        },
         components: {MHeader,Swiper,Loading},
         computed: {},
         created(){ //直接获取后台数据， 跨域 8080=>3000 不靠谱
@@ -34,11 +42,10 @@
             }).catch(err=>{
                 console.log(err);
             });
-            axios.get('/api/hot').then(res=>{
-                 this.books = res.data;
-            }).catch(err=>{
-              console.log(err);
-            });
+            this.getHot();
+        },
+        activated(){
+          this.getHot();
         }
     }
 </script>

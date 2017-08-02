@@ -9,6 +9,17 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 Vue.use(VueAwesomeSwiper);// 使用轮播图插件
 
 
+import VueLazyload from 'vue-lazyload'
+// 会给我们vue添加一个全局 v-lazy指令
+
+//如果是本地图片 需要import进来
+import loading from './common/loading.gif';
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  loading: loading,
+  attempt: 1
+});
+
 new Vue({ //创建一个实例
   el:'#app', //挂载点
   router, //路由实例
